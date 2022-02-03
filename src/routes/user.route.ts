@@ -1,16 +1,18 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import userRepository from "../repositories/user.repository";
 
 const usersRoute = Router();
 
-usersRoute.get('/users', (req: Request, res: Response , next: NextFunction) => {
-    const users = [{userName: 'Wagner'}];
+usersRoute.get('/users', async (req: Request, res: Response , next: NextFunction) => {
+    const users = await userRepository.findAllUsers();
     res.status(StatusCodes.OK).send({users});
 });
 
-usersRoute.get('/user/:uuid', (req: Request<{ uuid: string }>, res: Response , next: NextFunction) => {
-    const uuid = req.params.uuid
-    res.status(StatusCodes.OK).send({uuid});
+usersRoute.get('/user/:uuid', async (req: Request<{ uuid: string }>, res: Response , next: NextFunction) => {
+    const uuid = req.params.uuid;
+    const user = await userRepository.findById(uuid);
+    res.status(StatusCodes.OK).send({user});
 });
 
 usersRoute.post('/user', (req: Request<{ uuid: string }>, res: Response , next: NextFunction) => {

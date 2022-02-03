@@ -1,4 +1,6 @@
-import express, {Request, Response, NextFunction} from 'express';
+require('dotenv').config({path: __dirname + '/../.env'});
+
+import express from 'express';
 import usersRoute from "./routes/user.route";
 import statusRoute from "./routes/status.route";
 
