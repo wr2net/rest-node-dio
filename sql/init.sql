@@ -8,4 +8,4 @@ CREATE TABLE IF NOT EXISTS application_user(
     PRIMARY KEY (uuid)
     );
 
-INSERT INTO application_user (username, password) VALUES ('insert-username', crypt('insert-your-passwd', 'my_salt'));
+INSERT INTO application_user (username, password) VALUES ('insert-username', crypt('insert-your-passwd', 'your_salt_key'));
