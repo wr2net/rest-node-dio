@@ -21,6 +21,7 @@ São eles:
 
 # Requisitos
 NodeJs v16.13.2
+Banco de dados PostgreSQL configurado no ElephantSQL.
 
 ## Instalação
 ```
@@ -28,6 +29,10 @@ $ git clone git@github.com:wr2net/rest-node-dio.git
 $ cd rest-node-dio
 $ npm install
 ```
+
+`$ cp .env.example .env`
+
+Informe a string de conexão com o banco de dados no .env em 'DATABASE_STRING'.
 
 ## Rodando em ambiente de desenvolvimento
 `$ npm run dev`

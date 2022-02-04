@@ -4,6 +4,8 @@ import express from 'express';
 import usersRoute from "./routes/user.route";
 import statusRoute from "./routes/status.route";
 import errorHandler from "./middlewares/error-handler.middleware";
+import authorizationRoute from "./routes/authorization.route";
+
 
 const app = express();
 
@@ -14,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routers Settings
 app.use(usersRoute);        //Users
 app.use(statusRoute);       //Status
+app.use(authorizationRoute);
 
 // Handlers Errors Settings
 app.use(errorHandler);
