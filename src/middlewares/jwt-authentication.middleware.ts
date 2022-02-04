@@ -5,7 +5,7 @@ import userRepository from "../repositories/user.repository";
 
 const secretKey = `${process.env['SECRET_KEY']}`;
 
-async function bearerAuthenticationMiddleware (req: Request, res: Response, next: NextFunction) {
+async function jwtAuthenticationMiddleware (req: Request, res: Response, next: NextFunction) {
     try {
         const authorizationHeader = req.headers['authorization'];
 
@@ -19,22 +19,26 @@ async function bearerAuthenticationMiddleware (req: Request, res: Response, next
             throw new ForbiddenError('Invalid authentication');
         }
 
-        const tokenPayload = JWT.verify(token, `${secretKey}`);
+        try {
+            const tokenPayload = JWT.verify(token, `${secretKey}`);
 
-        if (typeof tokenPayload !== `object` || !tokenPayload.sub){
+            if (typeof tokenPayload !== `object` || !tokenPayload.sub){
+                throw new ForbiddenError('Invalid authentication');
+            }
+
+            const user = {
+                uuid: tokenPayload.sub,
+                username: tokenPayload.username
+            };
+
+            req.user = user;
+            next();
+        } catch (e) {
             throw new ForbiddenError('Invalid authentication');
         }
-
-        const user = {
-            uuid: tokenPayload.sub,
-            username: tokenPayload.username
-        };
-
-        req.user = user;
-        next();
     } catch (e) {
         next(e);
     }
 }
 
-export default bearerAuthenticationMiddleware;
+export default jwtAuthenticationMiddleware;

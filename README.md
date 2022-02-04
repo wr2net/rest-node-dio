@@ -11,6 +11,10 @@ São eles:
 
 * GET /status
 
+## Autenticação
+
+* POST /token
+* POST /token/validate
 ## Usuários
 
 * GET /users
@@ -18,6 +22,8 @@ São eles:
 * POST /user
 * PUT /user/:uuid
 * DELETE /user/:uuid
+
+
 
 # Requisitos
 NodeJs v16.13.2

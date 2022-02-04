@@ -3,6 +3,7 @@ import JWT from "jsonwebtoken";
 import {StatusCodes} from "http-status-codes";
 import basicAuthenticationMiddleware from "../middlewares/basic-authentication.middleware";
 import ForbiddenError from "../errors/forbidden.error.model";
+import jwtAuthenticationMiddleware from "../middlewares/jwt-authentication.middleware";
 
 const authorizationRoute = Router();
 const secretKey = `${process.env['SECRET_KEY']}`;
@@ -24,6 +25,10 @@ authorizationRoute.post('/token', basicAuthenticationMiddleware, async (req: Req
     } catch (e) {
         next(e);
     }
+});
+
+authorizationRoute.post('/token/validate', jwtAuthenticationMiddleware, (req: Request, res: Response , next: NextFunction) => {
+    res.sendStatus(StatusCodes.OK);
 });
 
 export default authorizationRoute;
