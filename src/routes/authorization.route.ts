@@ -5,6 +5,7 @@ import basicAuthenticationMiddleware from "../middlewares/basic-authentication.m
 import ForbiddenError from "../errors/forbidden.error.model";
 
 const authorizationRoute = Router();
+const secretKey = `${process.env['SECRET_KEY']}`;
 
 authorizationRoute.post('/token', basicAuthenticationMiddleware, async (req: Request, res: Response , next: NextFunction) => {
     try {
@@ -16,7 +17,6 @@ authorizationRoute.post('/token', basicAuthenticationMiddleware, async (req: Req
 
         const jwtPayload = { username: user.username };
         const jwtOptions = { subject: user?.uuid };
-        const secretKey = `${process.env['SECRET_KEY']}`;
 
         const jwt = JWT.sign(jwtPayload, `${secretKey}`, jwtOptions);
 
