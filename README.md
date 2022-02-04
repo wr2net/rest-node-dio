@@ -26,8 +26,8 @@ São eles:
 
 
 # Requisitos
-NodeJs v16.13.2
-Banco de dados PostgreSQL configurado no ElephantSQL.
+1. NodeJs v16.13.2
+2. Banco de dados PostgreSQL configurado no ElephantSQL.
 
 ## Instalação
 ```

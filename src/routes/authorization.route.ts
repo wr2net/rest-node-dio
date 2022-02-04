@@ -1,5 +1,5 @@
 import {NextFunction, Request, Response, Router} from 'express';
-import JWT from "jsonwebtoken";
+import JWT, {SignOptions} from "jsonwebtoken";
 import {StatusCodes} from "http-status-codes";
 import basicAuthenticationMiddleware from "../middlewares/basic-authentication.middleware";
 import ForbiddenError from "../errors/forbidden.error.model";
@@ -17,7 +17,7 @@ authorizationRoute.post('/token', basicAuthenticationMiddleware, async (req: Req
         }
 
         const jwtPayload = { username: user.username };
-        const jwtOptions = { subject: user?.uuid };
+        const jwtOptions: SignOptions = { subject: user?.uuid, expiresIn: 1000 };
 
         const jwt = JWT.sign(jwtPayload, `${secretKey}`, jwtOptions);
 
