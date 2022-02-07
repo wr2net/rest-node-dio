@@ -1,7 +1,7 @@
 require('dotenv').config({path: __dirname + '/../.env'});
 
 import express from 'express';
-import usersRoute from "./routes/user.route";
+import usersRoute from "./routes/users.route";
 import statusRoute from "./routes/status.route";
 import errorHandler from "./middlewares/error-handler.middleware";
 import authorizationRoute from "./routes/authorization.route";
